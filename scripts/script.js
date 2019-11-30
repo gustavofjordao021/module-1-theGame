@@ -1,5 +1,5 @@
 window.onload = function() {
-    document.getElementById("start-button").onclick = function() {
+    document.getElementById("btn").onclick = function() {
         startGame();
     };
   

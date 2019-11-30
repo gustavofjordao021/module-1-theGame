@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #134074;
+}
+
+#game-board {
+    padding: 0 90px;
+    margin: 0;
+}
+
+#game-instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 230px;
+    padding: 20px 0 10px 0;
+}
+
+#keyboard-inputs {
+    width: 180px;
+}
+
+#btn {
+    float: left;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    margin: 0 0 15px 0;
+    padding: 0px 0 20px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+    line-height: 45px;
+    width: 200px;
+    height: 45px;
+    font-size: 1em;
+    background: #8DA9C4;
+    box-shadow: 0 6px rgba(0, 0, 0, 0.2);
+    color: #EEF4ED;
+    font-family: 'Press Start 2P', cursive;
+}
+  
+#btn:hover {
+    background: #8DA9C4;
+    box-shadow: 0 5px #0B2545;
+    color: #EEF4ED;
+}
+
+#btn:active {
+    top: 5px;
+    box-shadow: 0 5px #0B2545;
+}
+
+button:focus, input[type="button"]:focus {
+    outline: none;
+}
