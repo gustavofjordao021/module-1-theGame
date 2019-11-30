@@ -10,6 +10,6 @@ class Component {
     drawComponent(imgSource) {
         let daCtx = this.game.ctx;
         this.img.src = imgSource;
-        daCtx.drawImage(this.img, 50, 380, this.width, this.height);
+        daCtx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 }

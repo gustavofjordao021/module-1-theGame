@@ -2,8 +2,8 @@ class Game {
     constructor() {
         this.canvas = undefined;
         this.ctx = undefined;
-        this.hero = new Player(this, 200, 450, 100, 150);
-        this.obstacle = [];
+        this.hero = new Player(this, 50, 380, 100, 150);
+        this.enemy = [];
         this.background = undefined;
         this.score = 0;
         this.backgroundImg = new Image();
@@ -25,26 +25,24 @@ class Game {
     start() {
         this.drawBackground();
         this.drawMainCharacters();
-        // setInterval(() => {
-        //     this.clear();
-        //     this.drawBackground();
-        //     this.drawMainCharacters();
-        //     this.hero.move();
-        //     for (let i = 0; i < this.obstacle.length; obstacle++) {
-        //         this.obstacle[i].move();
-        //         this.obstacle[i].draw();
-        //         this.car.crashCollision(this.obstacle[i]);
-        //         if (this.obstacle[i].y > 800) {
-        //             this.obstacle.splice(i, 1);
-        //         }
-        //     }
-        // }, 1000 / 60);
+        setInterval(() => {
+            this.clear();
+            this.drawBackground();
+            this.drawMainCharacters();
+            this.hero.move();
+            for (let i = 0; i < this.enemy.length; enemy++) {
+                this.enemy[i].move();
+                this.enemy[i].draw();
+                this.hero.crashCollision(this.obstacle[i]);
+                if (this.enemy[i].y > 800) {
+                    this.enemy.splice(i, 1);
+                }
+            }
+        }, 1000 / 60);
     }
 
     drawBackground() {
         this.backgroundImg.src = "/img/background.png";
-        let imgHeight = 0;
-        let scrollSpeed = 10;
         this.ctx.drawImage(
             this.backgroundImg,
             this.x,
@@ -54,24 +52,28 @@ class Game {
     }
     
     drawMainCharacters() {
-        this.hero.drawComponent("/img/hero/idle.png");
+        this.hero.drawComponent("/img/hero/hero_idle.png");
+    }
+
+    createEnemy() {
+        console.log("creating enemy >>>>> ", this.enemy);
+        if (Math.floor(Math.random() * 25) % 3 === 0) {
+            this.enemy.push(new Enemy());
+        }
+
+        setTimeout(() => {
+            this.createObstacles();
+        }, 3000);
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
 
 
 
-//     createObstacles() {
-//         console.log("creating obstacle >>>>> ", this.obstacle);
-//         if (Math.floor(Math.random() * 25) % 3 === 0) {
-//             this.obstacle.push(new Obstacle());
-//         }
 
-//         setTimeout(() => {
-//             this.createObstacles();
-//         }, 3000);
-//     }
 
-//     // clear() {
-//     //     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-//     // }
+
 
