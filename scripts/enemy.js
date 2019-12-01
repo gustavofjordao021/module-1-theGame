@@ -7,7 +7,7 @@ class Enemy {
         this.width = 100;
         this.height = 150;
         this.img = new Image();
-        this.img.src = "/img/goblin/goblin_idle.png";
+        this.img.src = "img/gobilin/gobilin_idle.png";
     }
 
     draw() {

@@ -30,13 +30,14 @@ class Game {
             this.drawBackground();
             this.drawMainCharacters();
             this.hero.move();
-            for (let i = 0; i < this.enemy.length; enemy++) {
+            this.createEnemy();
+            for (let i = 0; i < this.enemy.length; i++) {
                 this.enemy[i].move();
                 this.enemy[i].draw();
-                this.hero.crashCollision(this.obstacle[i]);
-                if (this.enemy[i].y > 800) {
-                    this.enemy.splice(i, 1);
-                }
+                // this.hero.crashCollision(this.obstacle[i]);
+                // if (this.enemy[i].y > 800) {
+                //     this.enemy.splice(i, 1);
+                // }
             }
         }, 1000 / 60);
     }
@@ -57,12 +58,12 @@ class Game {
 
     createEnemy() {
         console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.floor(Math.random() * 25) % 3 === 0) {
+        if (Math.floor(Math.random() * 25) % 5 === 0) {
             this.enemy.push(new Enemy());
         }
 
         setTimeout(() => {
-            this.createObstacles();
+            this.createEnemy();
         }, 3000);
     }
 
