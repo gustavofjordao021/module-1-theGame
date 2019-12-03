@@ -7,9 +7,28 @@ class Player extends Component {
         document.onkeydown = event => {
             const key = event.keyCode;
             const possibleKeystrokes = [32, 37, 39];
+            let jump_y = this.y;
+            let jumpLimit = jump_y + 40;
+            let goingDown = false;
+            let jump = () => {
+                if (this.y < jumpLimit && goingDown === false) {
+                    this.y += 15;
+                    console.log('jumping: ' + this.y + jumpLimit);
+                } else {
+                    goingDown = true;
+                    this.y -= 15;
+                    if (this.y > jump_y) {
+                        goingDown = false;
+                    }            
+                }
+            }
             if (possibleKeystrokes.includes(key)) {
                 event.preventDefault();
                 switch (key) {
+                    case 32:
+                        console.log("Test");
+                        jump();
+                        break;
                     case 39:
                         this.x += 15;
                         break;
@@ -18,7 +37,8 @@ class Player extends Component {
                         break;
                 }
             }
-        };
+            
+        }
     }
 }
 

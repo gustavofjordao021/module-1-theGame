@@ -2,10 +2,10 @@ class Enemy {
     constructor() {
         this.canvas = undefined;
         this.ctx = undefined;
-        this.x = Math.floor(Math.random() * 728);
+        this.x = 728;
         this.y = 380;
-        this.width = 100;
-        this.height = 150;
+        this.width = 200;
+        this.height = 200;
         this.img = new Image();
         this.img.src = "img/goblin/goblin_idle.png";
     }
@@ -20,10 +20,7 @@ class Enemy {
     move() {
         if (Math.floor(Math.random() * 20) % 3 === 0) {
             console.log("moving ---- ", this.y, this.x);
-            this.x -= 3;
-            // if (this.x < 0) {
-            //     this.enemy.splice(i); 
-            // }
+            this.x -= 4;
         }
     }
 }
