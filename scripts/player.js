@@ -3,7 +3,7 @@ class Player extends Component {
         super(game, x, y, w, h);
         this.goingDown = false;
         this.jump_y = this.y;
-        this.jumpLimit = this.jump_y - 40;
+        this.jumpLimit = this.jump_y - 100;
     }
 
     move() {
@@ -22,28 +22,27 @@ class Player extends Component {
                                     this.goingDown = false;
                                     clearInterval();
                                 }            
-                            }, 900);
+                            }, 1000);
                             clearInterval();
                         }      
-                    }, 900);                    
+                    }, 1000);                    
                 // } else {
                 //     this.goingDown = true;
                     
                     }
                 }
-                if (possibleKeystrokes.includes(key)) {
-                    event.preventDefault();
-                    switch (key) {
-                        case 32:
-                            console.log("Test");
-                            jump();
-                            break;
-                        case 39:
-                            this.x += 15;
-                            break;
-                        case 37:
-                            this.x -= 15;
-                            break;
+            if (possibleKeystrokes.includes(key)) {
+                event.preventDefault();
+                switch (key) {
+                    case 32:
+                        jump();
+                        break;
+                    case 39:
+                        this.x += 15;
+                        break;
+                    case 37:
+                        this.x -= 15;
+                        break;
                 }
             }            
         }
