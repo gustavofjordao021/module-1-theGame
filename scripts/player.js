@@ -25,12 +25,9 @@ class Player extends Component {
                             }, 1000);
                             clearInterval();
                         }      
-                    }, 1000);                    
-                // } else {
-                //     this.goingDown = true;
-                    
-                    }
+                    }, 1000);                  
                 }
+            }
             if (possibleKeystrokes.includes(key)) {
                 event.preventDefault();
                 switch (key) {
@@ -47,18 +44,17 @@ class Player extends Component {
             }            
         }
     }
+    crashCollision(ele) {
+        if (
+            (this.y + 10 < ele.y + ele.height &&
+                this.x + 15 < ele.x + ele.width &&
+                this.x + this.width - 15 > ele.x) ||
+            (ele.y + ele.height > this.y &&
+                ele.x < this.x + this.width &&
+                this.x < elem.x + ele.width)
+        ) {
+            setTimeout(() => alert("crash"), 5);
+            window.location.reload();
+        }
+    }
 }
-
-// crashCollision(ele) {
-//         if (
-//             (this.y + 10 < ele.y + ele.height &&
-//                 this.x + 15 < ele.x + ele.width &&
-//                 this.x + this.width - 15 > ele.x) ||
-//             (ele.y + ele.height > this.y &&
-//                 ele.x < this.x + this.width &&
-//                 this.x < elem.x + ele.width)
-//         ) {
-//             setTimeout(() => alert("crash"), 5);
-//             window.location.reload();
-//         }
-//     }

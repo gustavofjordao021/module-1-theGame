@@ -20,7 +20,6 @@ class Game {
         this.y = 0;
         this.start();
         this.createEnemy();
-        // this.createObstacles();
     }
 
     start() {
@@ -35,17 +34,13 @@ class Game {
                 if (this.enemy[i].x >= 0) {
                     this.enemy[i].move();
                     this.enemy[i].draw();
+                    this.hero.crashCollision(this.enemy[i]);
                 } else {
                     this.enemy.splice();
                 }
             }
-        }, 1000 / 60);            
-                // this.hero.crashCollision(this.obstacle[i]);
-                // if (this.enemy[i].y > 800) {
-                //     this.enemy.splice(i, 1);
-                // }}
+        }, 1000 / 60);                    
     }
-    
 
     drawBackground() {
         this.backgroundImg.src = "/img/background.png";
