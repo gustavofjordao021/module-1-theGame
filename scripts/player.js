@@ -46,9 +46,9 @@ class Player extends Component {
     }
     crashCollision(ele) {
         if (
-            (this.y + 5 < ele.y + ele.height &&
-                this.x + 10 < ele.x + ele.width &&
-                this.x + this.width - 10 > ele.x) ||
+            (this.y < ele.y + ele.height &&
+                this.x < ele.x + ele.width &&
+                this.x + this.width > ele.x) ||
             (ele.y + ele.height > this.y &&
                 ele.x < this.x + this.width &&
                 this.x < elem.x + ele.width)
