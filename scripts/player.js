@@ -3,7 +3,7 @@ class Player extends Component {
         super(game, x, y, w, h);
         this.goingDown = false;
         this.jump_y = this.y;
-        this.jumpLimit = this.jump_y - 100;
+        this.jumpLimit = this.jump_y - 120;
     }
 
     move() {
@@ -45,14 +45,10 @@ class Player extends Component {
         }
     }
     crashCollision(ele) {
-        if (
-            (this.y < ele.y + ele.height &&
-                this.x < ele.x + ele.width &&
-                this.x + this.width > ele.x) ||
-            (ele.y + ele.height > this.y &&
-                ele.x < this.x + this.width &&
-                this.x < elem.x + ele.width)
-        ) {
+        if ((this.x - 10 < ele.x + ele.width &&
+            this.x + this.width > ele.x &&
+            this.y + 10 < ele.y + ele.height &&
+            this.y + this.height > ele.y)) {
             setTimeout(() => alert("crash"), 5);
             window.location.reload();
         }

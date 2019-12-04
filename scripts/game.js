@@ -2,7 +2,7 @@ class Game {
     constructor() {
         this.canvas = undefined;
         this.ctx = undefined;
-        this.hero = new Player(this, 50, 380, 100, 150);
+        this.hero = new Player(this, 50, 400, 75, 125);
         this.enemy = [];
         this.background = undefined;
         this.score = 0;
