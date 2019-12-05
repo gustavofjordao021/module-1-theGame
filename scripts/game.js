@@ -11,6 +11,10 @@ class Game {
         this.y = undefined;
         this.width = 1024;
         this.height = 576;
+        this.imgWidth = 1024;
+        this.imgHeight = 576;
+        this.scrollVal = 0;
+        this.speed = 1;
     }
 
     init() {
@@ -32,6 +36,7 @@ class Game {
             this.drawMainCharacters();
             this.startScore();
             this.hero.move();
+            this.scrollBackground();
             for (let i = 0; i < this.enemy.length; i++) {            
                 if (this.enemy[i].x >= 0) {
                     this.enemy[i].move();
@@ -53,6 +58,20 @@ class Game {
             this.width,
             this.height);
     }
+
+    scrollBackground = () => {
+        let render = () => {
+            this.ctx.clearRect(0, 0, this.width, this.height);        
+            this.scrollVal += this.speed;                   
+            this.ctx.drawImage(
+                    this.backgroundImg, this.width - this.scrollVal, 0, this.imgWidth, this.imgHeight
+            );
+            setTimeout(function() {
+                render();
+            }, 1000);
+        }    
+        render();                
+    }            
     
     drawMainCharacters() {
         this.hero.drawComponent("/img/hero/hero_idle.png");
@@ -78,11 +97,4 @@ class Game {
         this.ctx.fillStyle = "white";
         this.ctx.fillText("Score: " + this.score, 850, 50);
     }
-}
-
-
-
-
-
-
-
+}  

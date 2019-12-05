@@ -4,53 +4,29 @@ class Player extends Component {
         this.goingDown = false;
         this.jump_y = this.y;
         this.jumpLimit = this.jump_y - 120;
-        this.gravity = 0.5;
-        this.velocity = 0;
+        // this.gravity = 0.5;
+        // this.velocity = 0;
     }
 
     move() {
         document.onkeydown = event => {
             const key = event.keyCode;
             const possibleKeystrokes = [32, 37, 39];
-            // let jump = () => {
-            //     if (this.y >= this.jumpLimit && this.goingDown === false) {
-            //         setInterval(() => {
-            //             while (this.y >= this.jumpLimit && this.goingDown === false) {
-            //                 this.y -= 15;
-            //             }
-            //             if (this.y = this.jumpLimit) {
-            //                 this.goingDown = true;
-            //                 setInterval(() => {
-            //                     this.y += 15;                        
-            //                     if (this.y = this.jump_y) {
-            //                         this.goingDown = false;
-            //                         clearInterval();
-            //                     }            
-            //                 }, 1500);
-            //                 clearInterval();
-            //             }      
-            //         }, 1000);                  
-            //     }
-            // }
             let jump = () => {
                 if (this.y >= this.jumpLimit && this.goingDown === false) {
                     setInterval(() => {
                         while (this.y >= this.jumpLimit && this.goingDown === false) {
                             this.y -= 15;
-                            if (this.y = this.jumpLimit) {
-                                this.goingDown = true;
-                                setInterval(() => {
-                                    this.y += 15;                        
-                                    if (this.y = this.jump_y) {
-                                        this.goingDown = false;
-                                        clearInterval();
-                                    }            
-                                }, 1500);
-                            }
                         }
                         if (this.y = this.jumpLimit) {
                             this.goingDown = true;
-                            
+                            setInterval(() => {
+                                this.y += 15;                        
+                                if (this.y = this.jump_y) {
+                                    this.goingDown = false;
+                                    clearInterval();
+                                }            
+                            }, 1500);
                             clearInterval();
                         }      
                     }, 1000);                  
