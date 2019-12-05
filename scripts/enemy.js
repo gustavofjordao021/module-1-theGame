@@ -3,9 +3,9 @@ class Enemy {
         this.canvas = undefined;
         this.ctx = undefined;
         this.x = 728;
-        this.y = 400;
-        this.width = 75;
-        this.height = 125;
+        this.y = 445;
+        this.width = 60;
+        this.height = 80;
         this.img = new Image();
         this.img.src = "img/goblin/goblin_idle.png";
     }
@@ -18,7 +18,7 @@ class Enemy {
     }
 
     move() {
-        if (Math.floor(Math.random() * 18) % 3 === 0) {
+        if (Math.floor(Math.random() * 6) % 3 === 0) {
             console.log("moving ---- ", this.y, this.x);
             this.x -= 4;
         }

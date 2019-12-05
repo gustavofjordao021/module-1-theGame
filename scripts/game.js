@@ -25,10 +25,12 @@ class Game {
     start() {
         this.drawBackground();
         this.drawMainCharacters();
+        this.startScore();
         setInterval(() => {
             this.clear();
             this.drawBackground();
             this.drawMainCharacters();
+            this.startScore();
             this.hero.move();
             for (let i = 0; i < this.enemy.length; i++) {            
                 if (this.enemy[i].x >= 0) {
@@ -58,7 +60,7 @@ class Game {
 
     createEnemy() {
         console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.floor(Math.random() * 25) % 5 === 0) {
+        if (Math.floor(Math.random() * 15) % 5 === 0) {
             this.enemy.push(new Enemy());
         }
         setTimeout(() => {
@@ -68,6 +70,13 @@ class Game {
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    startScore() {
+        let gameFont = "Press Start 2P";
+        this.ctx.font = `18px "${gameFont}"`;
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("Score: " + this.score, 850, 50);
     }
 }
 
