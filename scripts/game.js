@@ -6,7 +6,8 @@ class Game {
         this.enemy = [];
         this.background = undefined;
         this.score = 0;
-        this.backgroundImg = new Image();
+        this.backgroundImg1 = new Image();
+        this.backgroundImg2 = new Image();
         this.x = undefined;
         this.y = undefined;
         this.width = 1024;
@@ -14,7 +15,7 @@ class Game {
         this.imgWidth = 1024;
         this.imgHeight = 576;
         this.scrollVal = 0;
-        this.speed = 1;
+        this.speed = 3;
     }
 
     init() {
@@ -50,9 +51,10 @@ class Game {
     }
 
     drawBackground() {
-        this.backgroundImg.src = "/img/background.png";
+        this.backgroundImg1.src = "/img/background.png";
+        this.backgroundImg2.src = "/img/background.png";
         this.ctx.drawImage(
-            this.backgroundImg,
+            this.backgroundImg1,
             this.x,
             this.y,
             this.width,
@@ -64,28 +66,28 @@ class Game {
             this.ctx.clearRect(0, 0, this.width, this.height);        
             this.scrollVal += this.speed;                   
             this.ctx.drawImage(
-                    this.backgroundImg, this.width - this.scrollVal, 0, this.imgWidth, this.imgHeight
+                    this.backgroundImg1, 0 - this.scrollVal, 0, this.imgWidth, this.imgHeight
             );
-            setTimeout(function() {
-                render();
-            }, 1000);
+            this.ctx.drawImage(
+                this.backgroundImg2, 800 - this.scrollVal, 0, this.imgWidth, this.imgHeight
+            );
         }    
-        render();                
+        render();     
     }            
     
     drawMainCharacters() {
         this.hero.drawComponent("/img/hero/hero_idle.png");
     }
 
-    createEnemy() {
-        console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.floor(Math.random() * 15) % 5 === 0) {
-            this.enemy.push(new Enemy());
-        }
-        setTimeout(() => {
-        this.createEnemy();
-        }, 3000);
-    }
+    // createEnemy() {
+    //     console.log("creating enemy >>>>> ", this.enemy);
+    //     if (Math.floor(Math.random() * 15) % 5 === 0) {
+    //         this.enemy.push(new Enemy());
+    //     }
+    //     setTimeout(() => {
+    //     this.createEnemy();
+    //     }, 3000);
+    // }
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
