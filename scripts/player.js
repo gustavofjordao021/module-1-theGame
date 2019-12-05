@@ -39,7 +39,9 @@ class Player extends Component {
                         jump();
                         break;
                     case 39:
-                        this.x += 15;
+                        if (this.x < 300) {
+                            this.x += 15;
+                        }
                         break;
                     case 37:
                         this.x -= 15;

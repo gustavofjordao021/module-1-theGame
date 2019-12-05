@@ -36,8 +36,12 @@ class Game {
             this.drawBackground();
             this.drawMainCharacters();
             this.startScore();
-            this.hero.move();
-            this.scrollBackground();
+            this.hero.move();            
+            if (this.hero.x >= 300) {
+                this.scrollBackground();
+            } else {
+                return;
+            }
             for (let i = 0; i < this.enemy.length; i++) {            
                 if (this.enemy[i].x >= 0) {
                     this.enemy[i].move();
@@ -47,7 +51,7 @@ class Game {
                     this.enemy.splice();
                 }
             }
-        }, 1000 / 60);                    
+        }, 1000 / 60);
     }
 
     drawBackground() {
@@ -63,31 +67,39 @@ class Game {
 
     scrollBackground = () => {
         let render = () => {
-            this.ctx.clearRect(0, 0, this.width, this.height);        
-            this.scrollVal += this.speed;                   
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            if (this.scrollVal + 224 >= this.width){
+                this.scrollVal = 0;
+            }        
+            this.scrollVal += this.speed;
+            this.ctx.drawImage(
+                this.backgroundImg2, 800 - this.scrollVal, 0, this.imgWidth, this.imgHeight
+            );                   
             this.ctx.drawImage(
                     this.backgroundImg1, 0 - this.scrollVal, 0, this.imgWidth, this.imgHeight
             );
-            this.ctx.drawImage(
-                this.backgroundImg2, 800 - this.scrollVal, 0, this.imgWidth, this.imgHeight
-            );
-        }    
-        render();     
+        }
+        render();
+        this.drawMainCharacters();
+        this.startScore();
+        this.hero.move();
+        this.score += Math.floor(this.scrollVal / 100);
+        this.isGameFinished();        
     }            
     
     drawMainCharacters() {
         this.hero.drawComponent("/img/hero/hero_idle.png");
     }
 
-    // createEnemy() {
-    //     console.log("creating enemy >>>>> ", this.enemy);
-    //     if (Math.floor(Math.random() * 15) % 5 === 0) {
-    //         this.enemy.push(new Enemy());
-    //     }
-    //     setTimeout(() => {
-    //     this.createEnemy();
-    //     }, 3000);
-    // }
+    createEnemy() {
+        console.log("creating enemy >>>>> ", this.enemy);
+        if (Math.floor(Math.random() * 15) % 5 === 0) {
+            this.enemy.push(new Enemy());
+        }
+        setTimeout(() => {
+            this.createEnemy();
+        }, 3000);
+    }
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -97,6 +109,22 @@ class Game {
         let gameFont = "Press Start 2P";
         this.ctx.font = `18px "${gameFont}"`;
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("Score: " + this.score, 850, 50);
+        this.ctx.fillText("Score: " + this.score, 800, 50);
     }
-}  
+
+    isGameFinished() {
+        if (this.score >= 100) {
+        this.clear();
+        let gameFont = "Press Start 2P";
+        this.ctx.font = `36px "${gameFont}"`;
+        this.ctx.textAlign = "center";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(
+          "You win!",
+          this.canvas.width / 2,
+          this.canvas.height / 2
+        );
+        }
+        return true;
+    }
+}
