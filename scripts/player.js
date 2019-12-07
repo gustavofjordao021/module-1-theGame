@@ -1,36 +1,44 @@
 class Player extends Component {
     constructor(game, x, y, w, h) {
         super(game, x, y, w, h);
-        this.goingDown = false;
-        this.jump_y = this.y;
-        this.jumpLimit = this.jump_y - 120;
-        // this.gravity = 0.5;
-        // this.velocity = 0;
+        this.onGround = true;
+        this.velocityX = 4.0;
+        this.velocityY = 0.0;
+        this.gravity = 0.25;
     }
 
     move() {
         document.onkeydown = event => {
             const key = event.keyCode;
             const possibleKeystrokes = [32, 37, 39];
-            let jump = () => {
-                if (this.y >= this.jumpLimit && this.goingDown === false) {
-                    setInterval(() => {
-                        while (this.y >= this.jumpLimit && this.goingDown === false) {
-                            this.y -= 15;
-                        }
-                        if (this.y = this.jumpLimit) {
-                            this.goingDown = true;
-                            setInterval(() => {
-                                this.y += 15;                        
-                                if (this.y = this.jump_y) {
-                                    this.goingDown = false;
-                                    clearInterval();
-                                }            
-                            }, 1500);
-                            clearInterval();
-                        }      
-                    }, 1000);                  
+            let jumpStart = () => {
+                if (this.onGround && this.y >= 250) {
+                    this.y = -10.0;
+                    this.onGround = false;
                 }
+            }
+            let jumpEnd = () => {
+                if (this.velocityY < -3.0) {
+                    this.velocityY = -3.0;
+                }
+            }
+            let jumpFunction = () => {
+                this.velocityY += this.gravity;
+                if (this.x < 300) {
+                    this.x += this.velocityX;
+                }
+                this.y += this.velocityY;
+                if (this.y >= 400) {
+                    this.y = 400;
+                    this.velocityY = 0.0;
+                    this.onGround = true;
+                }
+            }
+            let jump = () => {
+                jumpStart();
+                jumpFunction();
+                jumpEnd();
+                window.setTimeout(jump, 1000 / 45);
             }
             if (possibleKeystrokes.includes(key)) {
                 event.preventDefault();
@@ -50,13 +58,18 @@ class Player extends Component {
             }            
         }
     }
+
     crashCollision(ele) {
         if ((this.x - 10 < ele.x + ele.width &&
             this.x + this.width > ele.x &&
             this.y + 10 < ele.y + ele.height &&
             this.y + this.height > ele.y)) {
-            setTimeout(() => alert("crash"), 5);
-            window.location.reload();
-        }
+                setTimeout(() => alert("crash"), 5);
+                window.location.reload();
+            }
     }
 }
+
+
+
+
