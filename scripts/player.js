@@ -4,28 +4,50 @@ class Player extends Component {
         this.onGround = true;
         this.velocityX = 4.0;
         this.velocityY = 0.0;
-        this.gravity = 0.25;
+        this.gravity = 0.5;
     }
 
     move() {
         document.onkeydown = event => {
             const key = event.keyCode;
             const possibleKeystrokes = [32, 37, 39];
+            // let jumpFunction = () => {
+            //     if (this.onGround) {
+            //         this.y += -10.0;
+            //         this.onGround = false;
+            //     }
+            //     this.velocityY += this.gravity;
+            //     if (this.x < 300) {
+            //         this.x += this.velocityX;   
+            //     }
+            //     this.y += this.velocityY;
+            //     if (this.y >= 400) {
+            //         this.y = 400;
+            //         this.velocityY = 0.0;
+            //         this.onGround = true;
+            //     }
+            //     if (this.velocityY < 3.0) {
+            //         this.velocityY = 3.0;
+            //     }
+            // }
             let jumpStart = () => {
-                if (this.onGround && this.y >= 250) {
-                    this.y = -10.0;
+                if (this.onGround) {
+                    this.y += -10.0;
                     this.onGround = false;
                 }
             }
             let jumpEnd = () => {
-                if (this.velocityY < -3.0) {
-                    this.velocityY = -3.0;
+                if (this.velocityY < 3.0) {
+                    this.velocityY = 3.0;
                 }
             }
             let jumpFunction = () => {
                 this.velocityY += this.gravity;
                 if (this.x < 300) {
-                    this.x += this.velocityX;
+                    this.x += this.velocityX;   
+                }
+                if (this.y <= 180) {
+                    this.y += this.velocityY;   
                 }
                 this.y += this.velocityY;
                 if (this.y >= 400) {
@@ -36,8 +58,8 @@ class Player extends Component {
             }
             let jump = () => {
                 jumpStart();
-                jumpFunction();
                 jumpEnd();
+                jumpFunction();                
                 window.setTimeout(jump, 1000 / 45);
             }
             if (possibleKeystrokes.includes(key)) {
@@ -66,10 +88,6 @@ class Player extends Component {
             this.y + this.height > ele.y)) {
                 setTimeout(() => alert("crash"), 5);
                 window.location.reload();
-            }
+        }
     }
 }
-
-
-
-
