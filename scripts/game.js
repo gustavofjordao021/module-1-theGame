@@ -37,7 +37,7 @@ class Game {
             this.drawBackground();
             this.drawMainCharacters();
             this.startScore();
-            if (this.hero.x >= 300) {
+            if (this.hero.x >= 250) {
                 this.scrollBackground();
             } else {
                 return;
