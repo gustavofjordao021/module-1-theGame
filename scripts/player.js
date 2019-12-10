@@ -5,67 +5,70 @@ class Player extends Component {
         this.velocityX = 4.0;
         this.velocityY = 0.0;
         this.gravity = 0.5;
-    }
+        this.goUp = false;
+        }
 
     move() {
+        let intervalId;
         document.onkeydown = event => {
             const key = event.keyCode;
             const possibleKeystrokes = [32, 37, 39];
-            // let jumpFunction = () => {
-            //     if (this.onGround) {
-            //         this.y += -10.0;
-            //         this.onGround = false;
-            //     }
-            //     this.velocityY += this.gravity;
-            //     if (this.x < 300) {
-            //         this.x += this.velocityX;   
-            //     }
-            //     this.y += this.velocityY;
-            //     if (this.y >= 400) {
-            //         this.y = 400;
-            //         this.velocityY = 0.0;
-            //         this.onGround = true;
-            //     }
-            //     if (this.velocityY < 3.0) {
-            //         this.velocityY = 3.0;
-            //     }
-            // }
             let jumpStart = () => {
-                if (this.onGround) {
-                    this.y += -10.0;
-                    this.onGround = false;
+                console.log("test", this.y);
+                this.velocityY += this.gravity;
+                // this.goUp = true;
+                if (!this.onGround && this.y >= 250) {
+                    this.y -= 10 
+                    this.y + this.velocityY;
+                } else {
+                    this.goUp = false;
                 }
             }
             let jumpEnd = () => {
                 if (this.velocityY < 3.0) {
                     this.velocityY = 3.0;
+                    this.y += this.velocityY; 
                 }
             }
             let jumpFunction = () => {
                 this.velocityY += this.gravity;
-                if (this.x < 300) {
+                if (this.x <= 300 && !this.onGround) {
+                    console.log("this.x, this.y:", this.x, this.y);
                     this.x += this.velocityX;   
                 }
-                if (this.y <= 180) {
-                    this.y += this.velocityY;   
+                if (!this.goUp) {
+                    console.log("2")
+                    this.y += this.velocityY;  
                 }
-                this.y += this.velocityY;
                 if (this.y >= 400) {
                     this.y = 400;
-                    this.velocityY = 0.0;
+                    console.log("3")
                     this.onGround = true;
+                    clearInterval(intervalId)
                 }
+                console.log("somefinudsifbsdufbsildbufsd", this.velocityX);
             }
             let jump = () => {
-                jumpStart();
-                jumpEnd();
-                jumpFunction();                
-                window.setTimeout(jump, 1000 / 45);
+                this.onGround = false;
+                intervalId = setInterval(() => {
+                    if(this.goUp) {
+                        jumpStart();
+                    } else {
+                        jumpFunction();
+                    }
+                    
+                    jumpEnd();  
+                    
+                    
+                }, 200);    
+                this.velocityX = 4.0;
+                this.velocityY = 0.0;
             }
-            if (possibleKeystrokes.includes(key)) {
-                event.preventDefault();
+            event.preventDefault();
+                if (possibleKeystrokes.includes(key)) {
                 switch (key) {
                     case 32:
+                        this.goUp = true;
                         jump();
                         break;
                     case 39:
@@ -91,3 +94,39 @@ class Player extends Component {
         }
     }
 }
+
+
+
+// let jumpStart = () => {
+//     this.onGround = false;
+//     this.velocityY += this.gravity;
+//     if (!this.onGround && this.y >= 250) {
+//         this.y += -15 - this.velocityY;
+//     }
+// }
+// let jumpEnd = () => {
+//     if (this.velocityY < 3.0) {
+//         this.velocityY = 3.0;
+//     }
+// }
+// let jumpFunction = () => {
+//     this.velocityY += this.gravity;
+//     if (this.x < 300 && this.y < 400) {
+//         this.x += this.velocityX;   
+//     }
+//     if (this.y <= 250) {
+//         this.y += this.velocityY;   
+//     }
+//     // this.y += this.velocityY;
+//     if (this.y >= 400) {
+//         this.y = 400;
+//         this.onGround = true;
+//     }
+// }
+// let jump = () => {
+//     this.intervalID = window.setInterval(() => {
+//         jumpStart();
+//         jumpFunction();                
+//         jumpEnd();                
+//     }, 1000 / 60);
+// }

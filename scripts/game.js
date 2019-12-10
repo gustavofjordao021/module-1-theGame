@@ -31,12 +31,12 @@ class Game {
         this.drawBackground();
         this.drawMainCharacters();
         this.startScore();
+        this.hero.move();            
         setInterval(() => {
             this.clear();
             this.drawBackground();
             this.drawMainCharacters();
             this.startScore();
-            this.hero.move();            
             if (this.hero.x >= 300) {
                 this.scrollBackground();
             } else {
@@ -113,7 +113,7 @@ class Game {
     }
 
     isGameFinished() {
-        if (this.score >= 100) {
+        if (this.score >= 100000) {
         this.clear();
         let gameFont = "Press Start 2P";
         this.ctx.font = `36px "${gameFont}"`;

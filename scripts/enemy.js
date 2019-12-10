@@ -3,7 +3,7 @@ class Enemy {
         this.canvas = undefined;
         this.ctx = undefined;
         this.x = 728;
-        this.y = 445;
+        this.y = 442;
         this.width = 60;
         this.height = 80;
         this.img = new Image();
