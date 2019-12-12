@@ -4,8 +4,8 @@ class Enemy {
         this.ctx = undefined;
         this.x = 728;
         this.y = 442;
-        this.width = 60;
-        this.height = 80;
+        this.width = 30;
+        this.height = 40;
         this.img = new Image();
         this.img.src = "img/goblin/goblin_idle.png";
     }
@@ -14,13 +14,13 @@ class Enemy {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         console.log("drawing obstacle ---->>>>> ", this.img, this.img.src);
-        this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.img, this.x, this.y, this.width * 2 , this.height * 2);
     }
 
     move() {
         if (Math.floor(Math.random() * 6) % 3 === 0) {
             console.log("moving ---- ", this.y, this.x);
-            this.x -= 4;
+            this.x -= 7.5;
         }
     }
 }
