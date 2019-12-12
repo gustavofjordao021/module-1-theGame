@@ -17,7 +17,7 @@ class Player extends Component {
             let jumpStart = () => {
                 this.velocityY += this.gravity;
                 if (!this.onGround && this.y >= 250) {
-                    this.y -= 25 
+                    this.y -= 20 
                     this.y + this.velocityY;
                     if (!this.onGround) {
                         this.x += this.velocityX;   
@@ -55,8 +55,8 @@ class Player extends Component {
                         jumpFunction();
                     }
                     jumpEnd();  
-                }, 1000 / 25);    
-                this.velocityX = 10.0;
+                }, 1000 / 30);    
+                this.velocityX = 7.5;
                 this.velocityY = 0.0;
             }
             event.preventDefault();
