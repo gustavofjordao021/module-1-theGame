@@ -60,7 +60,6 @@ class Player extends Component {
                 this.velocityX = 7.5;
                 this.velocityY = 0.0;
             }
-            //  
                 if (possibleKeystrokes.includes(key)) {
                 switch (key) {
                     case 32:

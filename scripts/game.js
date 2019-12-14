@@ -47,7 +47,7 @@ class Game {
             for (i = 0; i < this.enemy.length; i++) {            
                 if (this.enemy[i].x >= 0) {
                     this.enemy[i].move();
-                    this.enemy[i].draw();
+                    this.enemy[i].drawComponent();
                     this.hero.crashCollision(this.enemy[i]);                           
                 } else {
                     this.enemy.splice();
@@ -106,8 +106,8 @@ class Game {
 
     createEnemy() {
         console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.random() > 0.99) {
-            this.enemy.push(new Enemy());
+        if (Math.random() > 0.3) {
+            this.enemy.push(new Enemy(this));
         }
         setTimeout(() => {
             this.createEnemy();
