@@ -92,12 +92,21 @@ class Game {
     }            
     
     drawMainCharacters() {
-        this.hero.drawComponent("/img/hero/hero_idle.png");
+        if(this.hero.isMovingRight) {
+            this.hero.drawComponent("/img/hero/hero_runRight.png");
+        } else if (this.hero.isMovingLeft) {
+            this.hero.drawComponent("/img/hero/hero_runLeft.png");
+        } else if (this.hero.goUp) {
+            this.hero.drawComponent("/img/hero/hero_spinjump.png");
+        } else { 
+            this.hero.scale = 0;
+            this.hero.drawComponent("/img/hero/hero_idle.png");
+        }
     }
 
     createEnemy() {
         console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.floor(Math.random() * 5) % 5 === 0) {
+        if (Math.random() > 0.99) {
             this.enemy.push(new Enemy());
         }
         setTimeout(() => {

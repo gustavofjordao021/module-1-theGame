@@ -6,10 +6,11 @@ class Player extends Component {
         this.velocityY = 0.0;
         this.gravity = 1.5;
         this.goUp = false;
-        this.isMoving = false;
+        this.isMovingRight = false; 
+        this.isMovingLeft = false;
         }
 
-    move() {
+    move = () => {
         let intervalId;
         document.onkeydown = event => {
             const key = event.keyCode;
@@ -59,21 +60,31 @@ class Player extends Component {
                 this.velocityX = 7.5;
                 this.velocityY = 0.0;
             }
-            event.preventDefault();
+            //  
                 if (possibleKeystrokes.includes(key)) {
                 switch (key) {
                     case 32:
                         this.goUp = true;
+                        this.isMovingRight = false;
+                        this.isMovingLeft = false;
                         jump();
                         break;
                     case 39:
                         this.x += 15;
-                        this.isMoving = true;
+                        this.scale = (this.scale + 1) % 6; 
+                        this.isMovingRight = true;
+                        this.isMovingLeft = false;
                         break;
                     case 37:
                         this.x -= 15;
-                        this.isMoving = true;
+                        this.scale = (this.scale + 1) % 6;
+                        this.isMovingRight = false;
+                        this.isMovingLeft = true;
                         break;
+                    default:
+                        this.isMovingRight = false;
+                        this.isMovingLeft = false;
+                        this.goUp = false;
                 }
             }            
         }
