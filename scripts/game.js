@@ -54,12 +54,12 @@ class Game {
                             this.drawBackground();
                             this.drawMainCharacters();
                             this.enemy[i].drawComponent();
+                            this.startScore();
                             clearInterval(intervalID);
                             this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
                             this.ctx.beginPath();
                             this.ctx.fillRect(0, 0, this.width, this.height);
                             this.ctx.fill();
-                            this.startScore();
                             let gameFont = "Press Start 2P";
                             this.ctx.font = `36px "${gameFont}"`;
                             this.ctx.textAlign = "center";
@@ -75,6 +75,10 @@ class Game {
                     }
                 }
             } else {
+                this.drawBackground();
+                this.drawMainCharacters();
+                this.startScore();
+                clearInterval(intervalID);
                 this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
                 this.ctx.beginPath();
                 this.ctx.fillRect(0, 0, this.width, this.height);
@@ -88,7 +92,6 @@ class Game {
                     this.canvas.width / 2,
                     this.canvas.height / 2
                     );
-                // window.location.reload();
             }
         }, 1000 / 60);
     }
