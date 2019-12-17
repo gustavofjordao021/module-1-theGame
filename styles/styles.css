@@ -96,3 +96,7 @@ button {
 button:focus, input[type="button"]:focus {
     outline: none;
 }
+
+#instructions {
+    width: 100px;
+}

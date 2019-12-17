@@ -88,7 +88,7 @@ class Game {
                     this.canvas.width / 2,
                     this.canvas.height / 2
                     );
-                window.location.reload();
+                // window.location.reload();
             }
         }, 1000 / 60);
     }

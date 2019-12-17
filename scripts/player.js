@@ -14,7 +14,7 @@ class Player extends Component {
         let intervalId;
         document.onkeydown = event => {
             const key = event.keyCode;
-            const possibleKeystrokes = [32, 37, 39];
+            const possibleKeystrokes = [38, 37, 39];
             let jumpStart = () => {
                 this.velocityY += this.gravity;
                 if (!this.onGround && this.y >= 250) {
@@ -62,7 +62,7 @@ class Player extends Component {
             }
                 if (possibleKeystrokes.includes(key)) {
                 switch (key) {
-                    case 32:
+                    case 38:
                         this.goUp = true;
                         this.isMovingRight = false;
                         this.isMovingLeft = false;
