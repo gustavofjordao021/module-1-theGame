@@ -94,8 +94,8 @@ class Game {
     }
 
     drawBackground() {
-        this.backgroundImg1.src = "/img/background.png";
-        this.backgroundImg2.src = "/img/background.png";
+        this.backgroundImg1.src = "img/background.png";
+        this.backgroundImg2.src = "img/background.png";
         this.ctx.drawImage(
             this.backgroundImg1,
             this.x,
@@ -129,7 +129,7 @@ class Game {
     }            
     
     drawMainCharacters() {
-        this.hero.drawComponent("/img/hero/hero_idle.png");
+        this.hero.drawComponent("img/hero/hero_idle.png");
     }
 
     createEnemy() {
