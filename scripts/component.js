@@ -14,13 +14,9 @@ class Component {
         this.img.src = imgSource;
         daCtx.drawImage(
             this.img, 
-            32 * this.scale, 
-            0, 
-            32, 
-            64,
             this.x,
             this.y, 
             this.width, 
-            this.height);
+            this.height)
     }
 }

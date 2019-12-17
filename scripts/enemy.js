@@ -3,22 +3,18 @@ class Enemy extends Component {
         super(game);
         this.canvas = undefined;
         this.ctx = undefined;
-        this.x = 728;
+        this.x = 850;
         this.y = 442;
         this.width = 30;
         this.height = 40;
         this.img = new Image();
-        this.img.src = "img/goblin/goblin_spritesheet.png";
+        this.img.src = "img/goblin/goblin_idle.png";
     }
 
     drawComponent() {
         let daCtx = this.game.ctx;
         daCtx.drawImage(
-            this.img, 
-            26.75 * this.scale, 
-            0, 
-            32, 
-            64,
+            this.img,
             this.x,
             this.y, 
             this.width * 2, 
@@ -29,7 +25,6 @@ class Enemy extends Component {
         if (Math.floor(Math.random() * 6) % 3 === 0) {
             console.log("moving ---- ", this.y, this.x);
             this.x -= 7.5;
-            this.scale = (this.scale + 1) % 7;
         }
     }
 }

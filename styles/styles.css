@@ -4,16 +4,44 @@
 }
 
 body {
+    height: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     background-color: #134074;
+    font-family: "Press Start 2P";
+    color: white;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.25em;
 }
 
 #game-board {
+    width: 900px;
+    display: flex;  
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#intro-page {
+    width: 400px;
     padding: 0 90px;
     margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#game-logo {
+    width: 250px;
 }
 
 #game-instructions {
@@ -27,6 +55,10 @@ body {
 
 #keyboard-inputs {
     width: 180px;
+}
+
+button {
+    padding-top: 300px;
 }
 
 #btn {

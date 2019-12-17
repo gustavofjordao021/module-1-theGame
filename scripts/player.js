@@ -4,7 +4,7 @@ class Player extends Component {
         this.onGround = true;
         this.velocityX = 7.5;
         this.velocityY = 0.0;
-        this.gravity = 1.5;
+        this.gravity = 0.5;
         this.goUp = false;
         this.isMovingRight = false; 
         this.isMovingLeft = false;
@@ -90,12 +90,11 @@ class Player extends Component {
     }
 
     crashCollision(ele) {
-        if ((this.x < ele.x + ele.width &&
+        if ((this.x - 20 < ele.x + ele.width &&
             this.x + this.width > ele.x &&
-            this.y < ele.y + ele.height &&
+            this.y - 20 < ele.y + ele.height &&
             this.y + this.height > ele.y)) {
-                setTimeout(() => alert("crash"), 5);
-                window.location.reload();
+                return true;
         }
     }
 }

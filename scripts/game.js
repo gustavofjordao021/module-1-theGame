@@ -2,7 +2,7 @@ class Game {
     constructor() {
         this.canvas = undefined;
         this.ctx = undefined;
-        this.hero = new Player(this, 50, 400, 75, 125);
+        this.hero = new Player(this, 50, 400, 30, 120);
         this.enemy = [];
         this.background = undefined;
         this.score = 0;
@@ -28,30 +28,67 @@ class Game {
     }
 
     start() {
-        this.drawBackground();
-        this.drawMainCharacters();
-        this.startScore();
-        this.hero.move();            
-        setInterval(() => {
-            let i = 0;
-            this.clear();
             this.drawBackground();
             this.drawMainCharacters();
             this.startScore();
-            this.scrollBackground();
-            if (this.hero.x >= 250) {
-                this.speed = 3;
-            } else {
-                this.speed = 0;
-            }
-            for (i = 0; i < this.enemy.length; i++) {            
-                if (this.enemy[i].x >= 0) {
-                    this.enemy[i].move();
-                    this.enemy[i].drawComponent();
-                    this.hero.crashCollision(this.enemy[i]);                           
+            this.hero.move();                        
+            let intervalID = setInterval(() => {
+            if (!this.isGameFinished()) {
+                let i = 0;
+                this.clear();
+                this.drawBackground();
+                this.drawMainCharacters();
+                this.startScore();
+                this.scrollBackground();
+                if (this.hero.x >= 250) {
+                    this.speed = 3;
                 } else {
-                    this.enemy.splice();
-               }
+                    this.speed = 0;
+                }
+                for (i = 0; i < this.enemy.length; i++) {            
+                    if (this.enemy[i].x >= 0) {
+                        this.enemy[i].move();
+                        this.enemy[i].drawComponent();
+                        this.hero.crashCollision(this.enemy[i]);                           
+                        if (this.hero.crashCollision(this.enemy[i])) {
+                            this.drawBackground();
+                            this.drawMainCharacters();
+                            this.enemy[i].drawComponent();
+                            clearInterval(intervalID);
+                            this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                            this.ctx.beginPath();
+                            this.ctx.fillRect(0, 0, this.width, this.height);
+                            this.ctx.fill();
+                            this.startScore();
+                            let gameFont = "Press Start 2P";
+                            this.ctx.font = `36px "${gameFont}"`;
+                            this.ctx.textAlign = "center";
+                            this.ctx.fillStyle = "white";
+                            this.ctx.fillText(
+                                "You died!",
+                                this.canvas.width / 2,
+                                this.canvas.height / 2
+                                );
+                        }
+                    } else {
+                        this.enemy.splice();
+                    }
+                }
+            } else {
+                this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                this.ctx.beginPath();
+                this.ctx.fillRect(0, 0, this.width, this.height);
+                this.ctx.fill();
+                let gameFont = "Press Start 2P";
+                this.ctx.font = `36px "${gameFont}"`;
+                this.ctx.textAlign = "center";
+                this.ctx.fillStyle = "white";
+                this.ctx.fillText(
+                    "You win!",
+                    this.canvas.width / 2,
+                    this.canvas.height / 2
+                    );
+                window.location.reload();
             }
         }, 1000 / 60);
     }
@@ -86,22 +123,13 @@ class Game {
         this.startScore();
         this.hero.move();
         if (this.speed > 0) { 
-            this.score += Math.floor(this.scrollVal / 100);
+            this.score += Math.floor(this.scrollVal / 200);
         }
         this.isGameFinished();        
     }            
     
     drawMainCharacters() {
-        if(this.hero.isMovingRight) {
-            this.hero.drawComponent("/img/hero/hero_runRight.png");
-        } else if (this.hero.isMovingLeft) {
-            this.hero.drawComponent("/img/hero/hero_runLeft.png");
-        } else if (this.hero.goUp) {
-            this.hero.drawComponent("/img/hero/hero_spinjump.png");
-        } else { 
-            this.hero.scale = 0;
-            this.hero.drawComponent("/img/hero/hero_idle.png");
-        }
+        this.hero.drawComponent("/img/hero/hero_idle.png");
     }
 
     createEnemy() {
@@ -126,19 +154,9 @@ class Game {
     }
 
     isGameFinished() {
-        if (this.score >= 100000) {
-        this.clear();
-        let gameFont = "Press Start 2P";
-        this.ctx.font = `36px "${gameFont}"`;
-        this.ctx.textAlign = "center";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText(
-          "You win!",
-          this.canvas.width / 2,
-          this.canvas.height / 2
-        );
-        }
+        if (this.score >= 1000) {
         return true;
+        }
     }
 }
 
