@@ -3,7 +3,7 @@ class Enemy extends Component {
         super(game);
         this.canvas = undefined;
         this.ctx = undefined;
-        this.x = 850;
+        this.x = 1024;
         this.y = 442;
         this.width = 30;
         this.height = 40;
