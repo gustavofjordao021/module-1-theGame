@@ -17,9 +17,10 @@ class Game {
         this.scrollVal = 0;
         this.speed = 0;
         this.intervalArr = [];
+        this.enemyArr = [];
     }
 
-    init() {
+    init = () => {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.x = 0;
@@ -99,7 +100,7 @@ class Game {
         }, 1000 / 60);
     }
     
-    drawBackground() {
+    drawBackground = () => {
         this.backgroundImg1.src = "img/background.png";
         this.backgroundImg2.src = "img/background.png";
         this.ctx.drawImage(
@@ -134,39 +135,63 @@ class Game {
         this.isGameFinished();        
     }            
     
-    drawMainCharacters() {
+    drawMainCharacters = () => {
         this.hero.drawComponent("img/hero/hero_idle.png");
     }
 
-    createEnemy() {
+    createEnemy = () => {
         console.log("creating enemy >>>>> ", this.enemy);
-        if (Math.random() > 0.3) {
-            this.enemy.push(new Enemy(this));
+        if (this.isGameFinished) {
+            if (Math.random() > 0.35) {
+                this.enemy.push(new Enemy(this));
+            }
+            let enemyIntervalID = setTimeout(() => {
+                this.createEnemy();
+            }, 3000);
+            this.enemyArr.push(enemyIntervalID);
+        } else {
+            this.enemy = [];
         }
-        setTimeout(() => {
-            this.createEnemy();
-        }, 3000);
     }
 
-    clear() {
+    clear = () => {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    startScore() {
+    startScore = () => {
         let gameFont = "Press Start 2P";
         this.ctx.font = `18px "${gameFont}"`;
         this.ctx.fillStyle = "white";
         this.ctx.fillText("Score: " + this.score, 800, 50);
     }
 
-    isGameFinished() {
-        if (this.score >= 1000) {
-        return true;
+    isGameFinished = () => {
+        if (this.score >= 10000) {
+            return true;
         }
     }
 
     gameRestart() {
         clearInterval(this.intervalArr[0]);
-        this.start();
+        clearInterval(this.enemyArr[0]);
+        this.intervalArr = [];
+        this.enemyArr = [];
+        console.log(this.enemy);
+        this.canvas = undefined;
+        this.ctx = undefined;
+        this.hero = new Player(this, 50, 400, 30, 120);
+        this.background = undefined;
+        this.score = 0;
+        this.backgroundImg1 = new Image();
+        this.backgroundImg2 = new Image();
+        this.x = undefined;
+        this.y = undefined;
+        this.width = 1024;
+        this.height = 576;
+        this.imgWidth = 1024;
+        this.imgHeight = 576;
+        this.scrollVal = 0;
+        this.speed = 0;
+        this.init();    
     }
 }

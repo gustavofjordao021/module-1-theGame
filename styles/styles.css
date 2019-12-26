@@ -120,7 +120,39 @@ button {
     color: #EEF4ED;
 }
 
-#btn2   :active {
+#btn2:active {
+    top: 5px;
+    box-shadow: 0 5px #0B2545;
+}
+
+#btn3 {
+    float: left;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    margin: 0 0 15px 0;
+    padding: 0px 0 20px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+    line-height: 45px;
+    width: 200px;
+    height: 45px;
+    font-size: 1em;
+    background: #C48D8E;
+    box-shadow: 0 6px rgba(0, 0, 0, 0.2);
+    color: #EEF4ED;
+    font-family: 'Press Start 2P', cursive;
+}
+  
+#btn3:hover {
+    background: #C48D8E;
+    box-shadow: 0 5px #0B2545 ;
+    color: #EEF4ED;
+}
+
+#btn3:active {
     top: 5px;
     box-shadow: 0 5px #0B2545;
 }

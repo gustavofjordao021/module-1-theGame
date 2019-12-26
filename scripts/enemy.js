@@ -9,6 +9,7 @@ class Enemy extends Component {
         this.height = 40;
         this.img = new Image();
         this.img.src = "img/goblin/goblin_idle.png";
+        this.speed = 7.5;
     }
 
     drawComponent() {
@@ -24,7 +25,7 @@ class Enemy extends Component {
     move() {
         if (Math.floor(Math.random() * 6) % 3 === 0) {
             console.log("moving ---- ", this.y, this.x);
-            this.x -= 7.5;
+            this.x -= this.speed;
         }
     }
 }
