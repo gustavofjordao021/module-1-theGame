@@ -170,28 +170,4 @@ class Game {
             return true;
         }
     }
-
-    gameRestart() {
-        clearInterval(this.intervalArr[0]);
-        clearInterval(this.enemyArr[0]);
-        this.intervalArr = [];
-        this.enemyArr = [];
-        console.log(this.enemy);
-        this.canvas = undefined;
-        this.ctx = undefined;
-        this.hero = new Player(this, 50, 400, 30, 120);
-        this.background = undefined;
-        this.score = 0;
-        this.backgroundImg1 = new Image();
-        this.backgroundImg2 = new Image();
-        this.x = undefined;
-        this.y = undefined;
-        this.width = 1024;
-        this.height = 576;
-        this.imgWidth = 1024;
-        this.imgHeight = 576;
-        this.scrollVal = 0;
-        this.speed = 0;
-        this.init();    
-    }
 }

@@ -2,7 +2,6 @@ class Player extends Component {
     constructor(game, x, y, w, h) {
         super(game, x, y, w, h);
         this.onGround = true;
-        this.velocityX = 7.5;
         this.velocityY = 0.0;
         this.gravity = 0.5;
         this.goUp = false;
@@ -17,27 +16,21 @@ class Player extends Component {
             const possibleKeystrokes = [38, 37, 39];
             let jumpStart = () => {
                 this.velocityY += this.gravity;
-                if (!this.onGround && this.y >= 250) {
+                if (!this.onGround && this.y >= 240) {
                     this.y -= 20 
                     this.y + this.velocityY;
-                    if (!this.onGround) {
-                        this.x += this.velocityX;   
-                    }
                 } else {
                     this.goUp = false;
                 }
             }
             let jumpEnd = () => {
-                if (this.velocityY < 2.0) {
-                    this.velocityY = 2.0;
+                if (this.velocityY < 1.5) {
+                    this.velocityY = 1.5;
                     this.y += this.velocityY; 
-                }
+                }   
             }
             let jumpFunction = () => {
                 this.velocityY += this.gravity;
-                if (!this.onGround) {
-                    this.x += this.velocityX;   
-                }
                 if (!this.goUp) {
                     this.y += this.velocityY;  
                 }
@@ -57,10 +50,9 @@ class Player extends Component {
                     }
                     jumpEnd();  
                 }, 1000 / 30);    
-                this.velocityX = 7.5;
                 this.velocityY = 0.0;
             }
-                if (possibleKeystrokes.includes(key)) {
+            if (possibleKeystrokes.includes(key)) {
                 switch (key) {
                     case 38:
                         this.goUp = true;
@@ -69,13 +61,13 @@ class Player extends Component {
                         jump();
                         break;
                     case 39:
-                        this.x += 15;
+                        this.x += 20;
                         this.scale = (this.scale + 1) % 6; 
                         this.isMovingRight = true;
                         this.isMovingLeft = false;
                         break;
                     case 37:
-                        this.x -= 15;
+                        this.x -= 20;
                         this.scale = (this.scale + 1) % 6;
                         this.isMovingRight = false;
                         this.isMovingLeft = true;
