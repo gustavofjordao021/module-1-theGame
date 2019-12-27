@@ -24,7 +24,6 @@ class Enemy extends Component {
 
     move() {
         if (Math.floor(Math.random() * 6) % 3 === 0) {
-            // console.log("moving ---- ", this.y, this.x);
             this.x -= this.speed;
         }
     }

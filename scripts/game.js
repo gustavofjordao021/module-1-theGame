@@ -2,7 +2,7 @@ class Game {
     constructor() {
         this.canvas = undefined;
         this.ctx = undefined;
-        this.hero = new Player(this, 50, 400, 30, 120);
+        this.hero = new Player(this, 50, 400, 40, 120);
         this.enemy = [];
         this.background = undefined;
         this.score = 0;
@@ -36,8 +36,7 @@ class Game {
         this.hero.move();             
         let animation = () => {
             if (this.animationFlow) {
-                let animationID = window.requestAnimationFrame(animation);
-                this.animationArr.push(animationID);
+                window.requestAnimationFrame(animation);
                 if (!this.isGameFinished()) {
                     let i = 0;
                     this.clear();
