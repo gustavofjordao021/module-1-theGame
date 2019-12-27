@@ -16,7 +16,6 @@ class Game {
         this.imgHeight = 576;
         this.scrollVal = 0;
         this.speed = 0;
-        this.animationArr = [];
         this.animationFlow = true;
     }
 
@@ -36,75 +35,71 @@ class Game {
         this.startScore();
         this.hero.move();             
         let animation = () => {
-            let animationID = window.requestAnimationFrame(animation);
-            this.animationArr.push(animationID);
-            if (!this.isGameFinished()) {
-                let i = 0;
-                this.clear();
-                this.drawBackground();
-                this.drawMainCharacters();
-                this.startScore();
-                this.scrollBackground();
-                if (this.hero.x >= 250) {
-                    this.speed = 3;
-                } else {
-                    this.speed = 0;
-                }
-                for (i = 0; i < this.enemy.length; i++) {            
-                    if (this.enemy[i].x >= 0) {
-                        this.enemy[i].move();
-                        this.enemy[i].drawComponent();                        this.hero.crashCollision(this.enemy[i]);                           
-                        if (this.hero.crashCollision(this.enemy[i])) {
-                            this.drawBackground();
-                            this.drawMainCharacters();
-                            this.enemy[i].drawComponent();
-                            this.startScore();
-                            this.animationFlow = false;
-                            window.cancelAnimationFrame(this.animationArr[0]);
-                            this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-                            this.ctx.beginPath();
-                            this.ctx.fillRect(0, 0, this.width, this.height);
-                            this.ctx.fill();
-                            let gameFont = "Press Start 2P";
-                            this.ctx.font = `36px "${gameFont}"`;
-                            this.ctx.textAlign = "center";
-                            this.ctx.fillStyle = "white";
-                            this.ctx.fillText(
-                                "You died!",
-                                this.canvas.width / 2,
-                                this.canvas.height / 2
-                            );
-                        }
+            if (this.animationFlow) {
+                let animationID = window.requestAnimationFrame(animation);
+                this.animationArr.push(animationID);
+                if (!this.isGameFinished()) {
+                    let i = 0;
+                    this.clear();
+                    this.drawBackground();
+                    this.drawMainCharacters();
+                    this.startScore();
+                    this.scrollBackground();
+                    if (this.hero.x >= 250) {
+                        this.speed = 3;
                     } else {
-                        this.enemy.splice();
+                        this.speed = 0;
                     }
+                    for (i = 0; i < this.enemy.length; i++) {            
+                        if (this.enemy[i].x >= 0) {
+                            this.enemy[i].move();
+                            this.enemy[i].drawComponent();                        this.hero.crashCollision(this.enemy[i]);                           
+                            if (this.hero.crashCollision(this.enemy[i])) {
+                                this.drawBackground();
+                                this.drawMainCharacters();
+                                this.enemy[i].drawComponent();
+                                this.startScore();
+                                this.animationFlow = false;              
+                                this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                                this.ctx.beginPath();
+                                this.ctx.fillRect(0, 0, this.width, this.height);
+                                this.ctx.fill();
+                                let gameFont = "Press Start 2P";
+                                this.ctx.font = `36px "${gameFont}"`;
+                                this.ctx.textAlign = "center";
+                                this.ctx.fillStyle = "white";
+                                this.ctx.fillText(
+                                    "You died!",
+                                    this.canvas.width / 2,
+                                    this.canvas.height / 2
+                                );
+                            }
+                        } else {
+                            this.enemy.splice();
+                        }
+                    }
+                } else {
+                    this.drawBackground();
+                    this.drawMainCharacters();
+                    this.startScore();
+                    this.animationFlow = false;
+                    this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                    this.ctx.beginPath();
+                    this.ctx.fillRect(0, 0, this.width, this.height);
+                    this.ctx.fill();
+                    let gameFont = "Press Start 2P";
+                    this.ctx.font = `36px "${gameFont}"`;
+                    this.ctx.textAlign = "center";
+                    this.ctx.fillStyle = "white";
+                    this.ctx.fillText(
+                        "You win!",
+                        this.canvas.width / 2,
+                        this.canvas.height / 2
+                    );
                 }
-            } else {
-                this.drawBackground();
-                this.drawMainCharacters();
-                this.startScore();
-                this.animationFlow = false;
-                window.cancelAnimationFrame(this.animationArr[0]);
-                this.ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-                this.ctx.beginPath();
-                this.ctx.fillRect(0, 0, this.width, this.height);
-                this.ctx.fill();
-                let gameFont = "Press Start 2P";
-                this.ctx.font = `36px "${gameFont}"`;
-                this.ctx.textAlign = "center";
-                this.ctx.fillStyle = "white";
-                this.ctx.fillText(
-                    "You win!",
-                    this.canvas.width / 2,
-                    this.canvas.height / 2
-                );
             }
         }
-        if (this.animationFlow) {
-            window.requestAnimationFrame(animation);
-        } else {
-            window.cancelAnimationFrame(this.animationArr[0]);
-        }
+        window.requestAnimationFrame(animation);
     }
     
     drawBackground = () => {

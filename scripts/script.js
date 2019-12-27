@@ -1,5 +1,4 @@
 window.onload = function gameStart() {
-    let games = [];
     document.getElementById("btn").onclick = function() { 
         cleanCanvas();
         startGame();
