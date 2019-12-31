@@ -7,6 +7,8 @@ class Player extends Component {
         this.goUp = false;
         this.isMovingRight = false; 
         this.isMovingLeft = false;
+        this.isKeyUp = true;
+        this.isKeyDown = false;
         }
 
     move = () => {
@@ -76,6 +78,8 @@ class Player extends Component {
                         this.isMovingRight = false;
                         this.isMovingLeft = false;
                         this.goUp = false;
+                        this.isKeyDown = false;
+                        this.isKeyUp = true;
                 }
             }            
         }
