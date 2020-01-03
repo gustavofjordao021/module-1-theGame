@@ -63,13 +63,17 @@ class Player extends Component {
                         jump();
                         break;
                     case 39:
-                        this.x += 20;
+                        if (this.x < 1024) { 
+                            this.x += 20;                        
+                        }
                         this.scale = (this.scale + 1) % 6; 
                         this.isMovingRight = true;
                         this.isMovingLeft = false;
                         break;
                     case 37:
-                        this.x -= 20;
+                        if (this.x >= 20) { 
+                            this.x -= 20;                        
+                        }
                         this.scale = (this.scale + 1) % 6;
                         this.isMovingRight = false;
                         this.isMovingLeft = true;
