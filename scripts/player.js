@@ -52,7 +52,7 @@ class Player extends Component {
                     clearInterval(intervalId)
                 }
             }
-            let jumpFunctionLeft = () => {
+            let jumpFunction = () => {
                 this.velocityY += this.gravity;
                 if (this.x < 300) {
                     this.x += this.velocityX;
@@ -71,7 +71,7 @@ class Player extends Component {
                 intervalId = setInterval(() => {
                     if (this.goUp) {
                         jumpStart();
-                    } else if (this.goUp && ) {
+                    } else {
                         jumpFunction();
                     }
                     jumpEnd();  
