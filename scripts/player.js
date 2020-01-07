@@ -3,18 +3,25 @@ class Player extends Component {
         super(game, x, y, w, h);
         this.onGround = true;
         this.velocityY = 0.0;
+        this.velocityX = 4.0;
         this.gravity = 0.5;
         this.goUp = false;
         this.isMovingRight = false; 
         this.isMovingLeft = false;
         this.isKeyUp = true;
         this.isKeyDown = false;
+        this.keysPressed = [];
         }
 
     move = () => {
         let intervalId;
         document.onkeydown = event => {
             const key = event.keyCode;
+            if (this.keysPressed.length < 2) {
+                this.keysPressed.push(event.keyCode);
+            } else {
+                this.keysPressed = [];
+            }
             const possibleKeystrokes = [38, 37, 39];
             let jumpStart = () => {
                 this.velocityY += this.gravity;
@@ -31,8 +38,25 @@ class Player extends Component {
                     this.y += this.velocityY; 
                 }   
             }
-            let jumpFunction = () => {
+            let jumpFunctionRight = () => {
                 this.velocityY += this.gravity;
+                if (this.x < 300) {
+                    this.x += this.velocityX;
+                }
+                if (!this.goUp) {
+                    this.y += this.velocityY;  
+                }
+                if (this.y >= 400) {
+                    this.y = 400;
+                    this.onGround = true;
+                    clearInterval(intervalId)
+                }
+            }
+            let jumpFunctionLeft = () => {
+                this.velocityY += this.gravity;
+                if (this.x < 300) {
+                    this.x += this.velocityX;
+                }
                 if (!this.goUp) {
                     this.y += this.velocityY;  
                 }
@@ -47,7 +71,7 @@ class Player extends Component {
                 intervalId = setInterval(() => {
                     if (this.goUp) {
                         jumpStart();
-                    } else {
+                    } else if (this.goUp && ) {
                         jumpFunction();
                     }
                     jumpEnd();  

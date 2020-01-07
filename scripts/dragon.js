@@ -4,11 +4,11 @@ class Dragon extends Component {
         this.canvas = undefined;
         this.ctx = undefined;
         this.x = 1024;
-        this.y = 242;
-        this.width = 30;
+        this.y = 300;
+        this.width = 60;
         this.height = 40;
         this.img = new Image();
-        this.img.src = "img/goblin/goblin_idle.png";
+        this.img.src = "img/dragon/dragon_flying.png";
         this.speed = 5;
     }
 

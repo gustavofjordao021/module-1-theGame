@@ -142,11 +142,11 @@ class Game {
 
     createEnemy = () => {
         if (this.isGameFinished) {
-            if (Math.random() > 0.35) {
+            if (Math.random() > 0.3) {
                 this.enemy.push(new Goblin(this));
             } else if (Math.random() > 0.5) {
                 this.enemy.push(new Dragon(this));
-            } else if (Math.random() > 0.8) {
+            } else if (Math.random() > 0.75) {
                 this.enemy.push(new Goblin(this));
                 this.enemy.push(new Dragon(this));
             }
