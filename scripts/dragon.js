@@ -1,15 +1,15 @@
-class Goblin extends Component {
+class Dragon extends Component {
     constructor(game) {
         super(game);
         this.canvas = undefined;
         this.ctx = undefined;
         this.x = 1024;
-        this.y = 442;
+        this.y = 242;
         this.width = 30;
         this.height = 40;
         this.img = new Image();
         this.img.src = "img/goblin/goblin_idle.png";
-        this.speed = 7.5;
+        this.speed = 5;
     }
 
     drawComponent() {
