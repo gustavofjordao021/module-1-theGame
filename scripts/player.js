@@ -63,7 +63,7 @@ class Player extends Component {
                         jump();
                         break;
                     case 39:
-                        if (this.x < 1024) { 
+                        if (this.x < 1004) { 
                             this.x += 20;                        
                         }
                         this.scale = (this.scale + 1) % 6; 
