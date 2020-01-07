@@ -9,7 +9,7 @@ class Dragon extends Component {
         this.height = 40;
         this.img = new Image();
         this.img.src = "img/dragon/dragon_flying.png";
-        this.speed = 5;
+        this.speed = 3.5;
     }
 
     drawComponent() {
