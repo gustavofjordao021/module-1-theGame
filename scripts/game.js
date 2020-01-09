@@ -140,21 +140,21 @@ class Game {
         this.hero.drawComponent("img/hero/hero_idle.png");
     }
 
-    createEnemy = () => {
-        if (this.isGameFinished) {
-            if (Math.random() > 0.3) {
-                this.enemy.push(new Goblin(this));
-            } else if (Math.random() > 0.5) {
-                this.enemy.push(new Dragon(this));
-            } else if (Math.random() > 0.75) {
-                this.enemy.push(new Goblin(this));
-                this.enemy.push(new Dragon(this));
-            }
-            setTimeout(() => {
-                    this.createEnemy();
-                }, 3000);
-        }
-    }
+    // createEnemy = () => {
+    //     if (this.isGameFinished) {
+    //         if (Math.random() > 0.3) {
+    //             this.enemy.push(new Goblin(this));
+    //         } else if (Math.random() > 0.4) {
+    //             this.enemy.push(new Dragon(this));
+    //         } else if (Math.random() > 0.75) {
+    //             this.enemy.push(new Goblin(this));
+    //             this.enemy.push(new Dragon(this));
+    //         }
+    //         setTimeout(() => {
+    //                 this.createEnemy();
+    //             }, 3000);
+    //     }
+    // }
 
     clear = () => {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

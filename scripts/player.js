@@ -3,8 +3,8 @@ class Player extends Component {
         super(game, x, y, w, h);
         this.onGround = true;
         this.velocityY = 0.0;
-        this.velocityX = 4.0;
-        this.gravity = 0.5;
+        this.velocityX = 5.0;
+        this.gravity = 0.75;
         this.goUp = false;
         this.isMovingRight = false; 
         this.isMovingLeft = false;
@@ -22,14 +22,48 @@ class Player extends Component {
             } else {
                 this.keysPressed = [];
             }
+            console.log(this.keysPressed);
             const possibleKeystrokes = [38, 37, 39];
             let jumpStart = () => {
                 this.velocityY += this.gravity;
-                if (!this.onGround && this.y >= 240) {
+                if (!this.onGround && this.y >= 200) {
                     this.y -= 20 
                     this.y + this.velocityY;
                 } else {
                     this.goUp = false;
+                }
+            }
+            let jumpFunction = () => {
+                this.velocityY += this.gravity;
+                this.y += this.velocityY;  
+                if (this.y >= 400) {
+                    this.y = 400;
+                    this.onGround = true;
+                    clearInterval(intervalId)
+                }
+            }
+            let jumpFunctionRight = () => {
+                this.velocityY += this.gravity;
+                this.y += this.velocityY;  
+                if (this.x < 300) {
+                    this.x += this.velocityX;
+                }
+                if (this.y >= 400) {
+                    this.y = 400;
+                    this.onGround = true;
+                    clearInterval(intervalId)
+                }
+            }
+            let jumpFunctionLeft = () => {
+                this.velocityY += this.gravity;
+                this.y += this.velocityY;  
+                if (this.x < 300) {
+                    this.x -= this.velocityX;
+                }                
+                if (this.y >= 400) {
+                    this.y = 400;
+                    this.onGround = true;
+                    clearInterval(intervalId)
                 }
             }
             let jumpEnd = () => {
@@ -38,43 +72,18 @@ class Player extends Component {
                     this.y += this.velocityY; 
                 }   
             }
-            let jumpFunctionRight = () => {
-                this.velocityY += this.gravity;
-                if (this.x < 300) {
-                    this.x += this.velocityX;
-                }
-                if (!this.goUp) {
-                    this.y += this.velocityY;  
-                }
-                if (this.y >= 400) {
-                    this.y = 400;
-                    this.onGround = true;
-                    clearInterval(intervalId)
-                }
-            }
-            let jumpFunction = () => {
-                this.velocityY += this.gravity;
-                if (this.x < 300) {
-                    this.x += this.velocityX;
-                }
-                if (!this.goUp) {
-                    this.y += this.velocityY;  
-                }
-                if (this.y >= 400) {
-                    this.y = 400;
-                    this.onGround = true;
-                    clearInterval(intervalId)
-                }
-            }
             let jump = () => {
                 this.onGround = false;
                 intervalId = setInterval(() => {
-                    if (this.goUp) {
-                        jumpStart();
-                    } else {
-                        jumpFunction();
+                    jumpStart();
+                    if (this.keysPressed[0] === 38 && this.keysPressed[1] === 37) {
+                        jumpFunctionLeft();
+                    } else if (this.keysPressed[0] === 38 && this.keysPressed[1] === 39){
+                        jumpFunctionRight();
                     }
-                    jumpEnd();  
+                    console.log(this.y);  
+                    jumpFunction();
+                    jumpEnd();
                 }, 1000 / 30);    
                 this.velocityY = 0.0;
             }
