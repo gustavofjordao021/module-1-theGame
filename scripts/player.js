@@ -4,7 +4,7 @@ class Player extends Component {
         this.onGround = true;
         this.velocityY = 0.0;
         this.velocityX = 5.0;
-        this.gravity = 0.75;
+        this.gravity = 0.6;
         this.goUp = false;
         this.isMovingRight = false; 
         this.isMovingLeft = false;
@@ -17,7 +17,7 @@ class Player extends Component {
         let intervalId;
         document.onkeydown = event => {
             const key = event.keyCode;
-            if (this.keysPressed.length < 2) {
+            if (this.keysPressed.length < 1) {
                 this.keysPressed.push(event.keyCode);
             } else {
                 this.keysPressed = [];
@@ -42,30 +42,30 @@ class Player extends Component {
                     clearInterval(intervalId)
                 }
             }
-            let jumpFunctionRight = () => {
-                this.velocityY += this.gravity;
-                this.y += this.velocityY;  
-                if (this.x < 300) {
-                    this.x += this.velocityX;
-                }
-                if (this.y >= 400) {
-                    this.y = 400;
-                    this.onGround = true;
-                    clearInterval(intervalId)
-                }
-            }
-            let jumpFunctionLeft = () => {
-                this.velocityY += this.gravity;
-                this.y += this.velocityY;  
-                if (this.x < 300) {
-                    this.x -= this.velocityX;
-                }                
-                if (this.y >= 400) {
-                    this.y = 400;
-                    this.onGround = true;
-                    clearInterval(intervalId)
-                }
-            }
+            // let jumpFunctionRight = () => {
+            //     this.velocityY += this.gravity;
+            //     this.y += this.velocityY;  
+            //     if (this.x < 300) {
+            //         this.x += this.velocityX;
+            //     }
+            //     if (this.y >= 400) {
+            //         this.y = 400;
+            //         this.onGround = true;
+            //         clearInterval(intervalId)
+            //     }
+            // }
+            // let jumpFunctionLeft = () => {
+            //     this.velocityY += this.gravity;
+            //     this.y += this.velocityY;  
+            //     if (this.x < 300) {
+            //         this.x -= this.velocityX;
+            //     }                
+            //     if (this.y >= 400) {
+            //         this.y = 400;
+            //         this.onGround = true;
+            //         clearInterval(intervalId)
+            //     }
+            // }
             let jumpEnd = () => {
                 if (this.velocityY < 1.5) {
                     this.velocityY = 1.5;
@@ -76,14 +76,8 @@ class Player extends Component {
                 this.onGround = false;
                 intervalId = setInterval(() => {
                     jumpStart();
-                    if (this.keysPressed[0] === 38 && this.keysPressed[1] === 37) {
-                        jumpFunctionLeft();
-                    } else if (this.keysPressed[0] === 38 && this.keysPressed[1] === 39){
-                        jumpFunctionRight();
-                    }
-                    console.log(this.y);  
                     jumpFunction();
-                    jumpEnd();
+                    jumpEnd();  
                 }, 1000 / 30);    
                 this.velocityY = 0.0;
             }
